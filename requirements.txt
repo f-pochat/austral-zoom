@@ -1,0 +1,11 @@
+uvicorn~=0.30.5
+fastapi~=0.112.0
+torch~=2.4.0
+ollama~=0.3.1
+tqdm~=4.66.4
+numpy~=1.26.4
+soundfile~=0.12.1
+pydub~=0.25.1
+llama-index~=0.10.59
+python-multipart~=0.0.9
+librosa~=0.10.2.post1

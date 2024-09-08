@@ -1,7 +1,11 @@
+import os
+
 import ollama
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 from llama_index.core.text_splitter import TokenTextSplitter
 from llama_index.core import Document
+
+from src.logger import log
 
 
 def recursive_summarization(document: Document, generate_kwargs, chunk_size: int):
@@ -31,8 +35,12 @@ def recursive_summarization(document: Document, generate_kwargs, chunk_size: int
             ### Assistant:
             According to the context information, the summary in English is: """
 
-            response = ollama.generate(model="llama-3.1", prompt=prompt, **{**generate_kwargs, 'max_new_tokens': 200})
-            response_text = response['choices'][0]['text'].strip()
+            if os.getenv("ENVIRONMENT") == "development":
+                response = ollama.generate(model="llama3.1:latest", prompt=prompt, **generate_kwargs)
+            else:
+                client = ollama.Client(os.getenv("OLLAMA_HOST"))
+                response = client.generate(model="llama3.1:latest", prompt=prompt, **generate_kwargs)
+            response_text = response['response'].strip()
             summarized_texts.append(response_text)
 
         if len(nodes) == 1:

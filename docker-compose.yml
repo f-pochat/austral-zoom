@@ -1,0 +1,25 @@
+services:
+  processor:
+    build:
+      context: .
+    container_name: processor
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
