@@ -9,3 +9,5 @@ pydub~=0.25.1
 llama-index~=0.10.59
 python-multipart~=0.0.9
 librosa~=0.10.2.post1
+langchain
+langchain-ollama

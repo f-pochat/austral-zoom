@@ -9,6 +9,7 @@ logger.init_loggers()
 
 app = FastAPI()
 
+
 @app.post("/")
 def process_audio(file: UploadFile):
     return service.process_audio_service(audio=file)

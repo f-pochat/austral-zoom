@@ -17,9 +17,6 @@ COPY ./requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r /app/requirements.txt
 
-# Copy the rest of the application code to the container
-COPY . /app
-
 # Install whisper.cpp
 RUN git clone https://github.com/ggerganov/whisper.cpp.git/
 
@@ -27,6 +24,9 @@ RUN mv whisper.cpp ../
 RUN cd ../whisper.cpp; make
 RUN mkdir /models
 RUN cd ../whisper.cpp; ./models/download-ggml-model.sh tiny.en /models
+
+# Copy the rest of the application code to the container
+COPY . /app
 
 # Set environment variables for FastAPI
 ENV HOST 0.0.0.0
