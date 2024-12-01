@@ -1,16 +1,11 @@
 from fastapi import UploadFile
-from pydub import AudioSegment
 
-import numpy as np
-import soundfile as sf
 from io import BytesIO
 
 from src.logger import log
 
 import subprocess
 import os
-
-import librosa
 
 
 # TODO add concurrency on tmp_file (e.g. adding a id suffix)

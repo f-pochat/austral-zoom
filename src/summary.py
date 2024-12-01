@@ -6,16 +6,16 @@ from langchain_text_splitters import CharacterTextSplitter
 
 from src.logger import log
 
-model = OllamaLLM(model="tinyllama")
+model = OllamaLLM(model="tinyllama", language="es")
 
 
 def get_summary(document: str) -> str:
     log.info(f"Getting summary for document")
 
     prompt = """
-                      Please provide a summary of the following text.
-                      TEXT: {text}
-                      SUMMARY:
+                      Por favor, escribir un resumen del siguiente texto. En español.
+                      TEXTO: {text}
+                      RESUMEN:
                       """
 
     question_prompt = PromptTemplate(
@@ -23,10 +23,13 @@ def get_summary(document: str) -> str:
     )
 
     refine_prompt_template = """
-                  Write a concise summary of the following text delimited by triple backquotes.
-                  Return your response in bullet points which covers the key points of the text.
-                  ```{text}```
-                  BULLET POINT SUMMARY:
+                  Escribe un resumen conciso en español del siguiente texto, delimitado por tres comillas invertidas.
+
+                  {texto}
+                    
+                  Devuelve tu respuesta en viñetas, cubriendo los puntos clave del texto.
+                    
+                  RESUMEN EN VIÑETAS:
                   """
 
     refine_prompt = PromptTemplate(

@@ -23,7 +23,7 @@ RUN git clone https://github.com/ggerganov/whisper.cpp.git/
 RUN mv whisper.cpp ../
 RUN cd ../whisper.cpp; make
 RUN mkdir /models
-RUN cd ../whisper.cpp; ./models/download-ggml-model.sh tiny.en /models
+RUN cd ../whisper.cpp; ./models/download-ggml-model.sh base /models
 
 # Copy the rest of the application code to the container
 COPY . /app

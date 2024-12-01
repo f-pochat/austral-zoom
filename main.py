@@ -1,7 +1,6 @@
 import ssl
 import uvicorn
 from fastapi import FastAPI, UploadFile
-import logging
 from src import service, logger
 
 ssl._create_default_https_context = ssl._create_unverified_context
